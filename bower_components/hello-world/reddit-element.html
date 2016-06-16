@@ -1,0 +1,26 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="hello-world.html">
+<link rel="import" href="lorem-element.html">
+
+<!-- Defines element markup -->
+<dom-module id="reddit-element">
+    <template>
+        <p>reddit <strong>{{who}}</strong> :)</p>
+        <hello-world who="{{who}}"></hello-world>
+        <lorem-element who="{{who}}"></lorem-element>
+    </template>
+</dom-module>
+
+<!-- Registers custom element -->
+<script>
+Polymer({
+    is: 'reddit-element',
+    properties: {
+        who: {
+            type: String,
+            value: 'World'
+        }
+    }
+});
+</script>

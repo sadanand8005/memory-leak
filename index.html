@@ -3,6 +3,7 @@
 <head>
   <title>Polymer material design elements demos</title>
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js" async></script>
+  <script type="text/javascript" src="./jquery.min.js"></script>
   <link rel="import" href="elements.html" />
 <style is="custom-style">
 html, body {
@@ -17,31 +18,6 @@ paper-toolbar {
   color: #fff;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
 }
-
-
-paper-slider.blue {
-  --paper-slider-knob-color: var(--paper-light-blue-500);
-  --paper-slider-active-color: var(--paper-light-blue-500);
-}
-
-paper-slider.red {
-  --paper-slider-knob-color: var(--paper-red-500);
-  --paper-slider-active-color: var(--paper-red-500);
-}
-
-paper-slider.green {
-  --paper-slider-knob-color: var(--paper-green-500);
-  --paper-slider-active-color: var(--paper-green-500);
-}
-
-paper-progress {
-  width: 30%;
-/*  margin-right: 12px;*/
-}
-
-/*.line {
-   margin-bottom: 20px;
- }*/
 
 .line span {
 /*  margin-left: 12px;*/
@@ -83,91 +59,18 @@ paper-header-panel .content {
   margin-right: 12px;
 }
 
-paper-button.blue {
-  color: var(--paper-light-blue-500);
-}
-paper-button.blue:hover {
-  background: var(--paper-light-blue-50);
-}
-paper-button.red {
-  color: var(--paper-red-900);
-  background: var(--paper-red-500);
-}
-paper-button.red:hover {
-  background: var(--paper-red-50);
-}
-paper-button.green {
-  color: var(--paper-green-900);
-  background: var(--paper-green-500);
-}
-paper-button.green:hover {
-  background: var(--paper-green-50);
-}
-paper-button.orange {
-  color: var(--paper-orange-500);
-
-}
-paper-button.orange:hover {
-  background: var(--paper-orange-50);
-}
-paper-button[raised].colorful {
-/*   background: #4285f4;*/
-   /*color: #fff;*/
- }
-
  section {
    margin: 24px 0;
  }
 
 </style>
 </head>
-<body>
-
-<paper-dialog id="modal" entry-animation="scale-up-animation"
-              exit-animation="scale-down-animation" with-backdrop>
-</paper-dialog>
-
-<paper-header-panel mode="cover" class="pink">
-  <div class="paper-header tall">
-
-<paper-toolbar>
-  <paper-tooltip for="menu-btn">Refresh</paper-tooltip>
-  <span class="flex" style="font-size:25px;" id="polymerVersion">Polymer material design element demos</span>
-  <paper-tooltip for="refresh-btn">Refresh</paper-tooltip>
-  <paper-tooltip for="add-btn">Add</paper-tooltip>
-  <paper-tooltip for="search-btn">Search</paper-tooltip>
-  <paper-tooltip for="upload-btn">Upload</paper-tooltip>
-</paper-toolbar>
-
-<section class="layout horizontal center">
-
-
-</section>
-
-<section  class="layout horizontal justified" style="margin: 32px 0">
-  <paper-progress clas="flex" value="800" min="100" max="1000"></paper-progress>
-  <paper-progress clas="flex" value="30" secondary-progress="70"></paper-progress>
-  <paper-progress clas="flex" indeterminate></paper-progress>
-</section>
-
-<section class="layout horizontal center">
-  <div style="margin-right: 24px">
-    <paper-spinner active></paper-spinner>
-   </div>
-   <paper-slider pin max="10" step="1" value="5"></paper-slider>
-   <paper-slider class="red" value="23" max="255"></paper-slider>
-   <paper-slider class="green" value="183" max="255"></paper-slider>
-   <paper-slider class="blue" value="0" max="255" secondary-progress="170"></paper-slider>
-</section>
-
-<section class="layout horizontal center">
-
-  <paper-button class="orange colorful" raised>Dialog</paper-button>
-
-</section>
-
-  </div>
-</paper-header-panel>
+<body onunload="test()">
+<div id="container">
+  <paper-dialog id="modal" entry-animation="scale-up-animation"
+                exit-animation="scale-down-animation" with-backdrop>
+  </paper-dialog>
+</div>
 
 
 <script>
@@ -175,6 +78,35 @@ paper-button[raised].colorful {
 setTimeout(function() {
         location.reload();
       }, 10000);
+
+function purge(d) {
+  var a = d.attributes, i, l, n;
+  if (a) {
+      for (i = a.length - 1; i >= 0; i -= 1) {
+          n = a[i].name;
+          //if (typeof d[n] === 'function') {
+             d[n] =null;
+         // }
+      }
+  }
+  a = d.childNodes;
+  if (a) {
+      l = a.length;
+      for (i = 0; i < l; i += 1) {
+          purge(d.childNodes[i]);
+      }
+  }
+
+}
+
+function test(){
+  purge(document.querySelector('paper-dialog'));
+  //document.querySelector('paper-dialog').remove(this);
+  $("#container").remove();
+  //document.getElementById("container").innerHTML = "";
+  CollectGarbage();
+}
+
 
 </script>
 </body>

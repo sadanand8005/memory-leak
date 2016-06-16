@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Polymer material design elements demos</title>
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js" async></script>
+  <script type="text/javascript" src="./jquery.min.js"></script>
+  <link rel="import" href="bower_components/hello-world/hello-world.html" />
+  <link rel="import" href="bower_components/hello-world/lorem-element.html" />
+  <link rel="import" href="bower_components/hello-world/reddit-element.html" />
+</head>
+<body onunload="test()">
+<div id="container">
+        <hello-world who="hello-world"></hello-world>
+        <lorem-element who="lorem-element"></lorem-element>
+        <reddit-element who="reddit-element"></reddit-element>
+</div>
+
+
+<script>
+
+setTimeout(function() {
+        location.reload();
+      }, 10000);
+
+function purge(d) {
+  var a = d.attributes, i, l, n;
+  if (a) {
+      for (i = a.length - 1; i >= 0; i -= 1) {
+          n = a[i].name;
+          //if (typeof d[n] === 'function') {
+             d[n] =null;
+         // }
+      }
+  }
+  a = d.childNodes;
+  if (a) {
+      l = a.length;
+      for (i = 0; i < l; i += 1) {
+          purge(d.childNodes[i]);
+      }
+  }
+
+}
+
+function test(){
+  return;
+  purge(document.querySelector('reddit-element'));
+  purge(document.querySelector('lorem-element'));
+  purge(document.querySelector('hello-world'));
+  //document.querySelector('paper-dialog').remove(this);
+  $("#container").remove();
+  //document.getElementById("container").innerHTML = "";
+  CollectGarbage();
+}
+
+
+</script>
+</body>
+</body>
+</html>
