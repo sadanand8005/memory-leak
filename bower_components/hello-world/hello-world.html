@@ -4,7 +4,8 @@
 <!-- Defines element markup -->
 <dom-module id="hello-world">
     <template>
-        <p>Hello <strong>{{who}}</strong> :)</p>
+        <p on-click="clickEvent">Hello <strong>{{who}}</strong> :)</p>
+        <input type="text" on-keypress="keyEvent" on-click="clickEvent" />
     </template>
 </dom-module>
 
@@ -17,6 +18,25 @@ Polymer({
             type: String,
             value: 'World'
         }
+    },
+    listeners: {
+        'simple-listener': '_onSimpleCall'
+    },
+    _textBold : function () {
+
+    },
+    _textItalic : function () {
+        
+    },
+    _onSimpleCall : function () {
+        this._textBold();
+        this._textItalic();
+    },
+    clickEvent: function() {
+      console.log('Click event triggered');
+    },
+    keyEvent: function() {
+      console.log('key event triggered');
     }
 });
 </script>
