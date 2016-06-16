@@ -19,8 +19,9 @@
 <script>
 
 setTimeout(function() {
-        location.reload();
-      }, 10000);
+  $("#container").append("<h1>Reloading...</h1>");
+        setTimeout(function() { location.reload(); }, 1000);
+      }, 8000);
 
 function purge(d) {
   var a = d.attributes, i, l, n;
